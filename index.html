@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teeny Titans Recomp</title>
+<meta name="description" content="Unofficial recomp of Teeny Titans that runs on modern Android. A fan-made preservation project.">
+<meta property="og:title" content="Teeny Titans Recomp">
+<meta property="og:description" content="Teeny Titans is back, running on modern Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#ffffff; --off:#f5f8fa; --black:#0a0a0a; --grey:#6b7280; --line:#e5e7eb;
+    --blue:#4cc9f0; --blue-dark:#1fa8d6; --blue-soft:#e6f7fd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Space Grotesk",system-ui,sans-serif;background:var(--white);color:var(--black);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue-dark)}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px}
+  .mono{font-family:"JetBrains Mono",monospace}
+
+  header{padding:28px 0}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:700;font-size:1rem;letter-spacing:.5px;color:var(--black);text-decoration:none}
+  .logo span{color:var(--blue)}
+
+  /* language switch */
+  .lang{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:var(--off);border:1px solid var(--line);
+    border-radius:999px;padding:3px;cursor:pointer;user-select:none}
+  .lang button{position:relative;z-index:1;background:none;border:none;font:inherit;font-size:.78rem;font-weight:700;
+    letter-spacing:.5px;padding:6px 14px;color:var(--grey);cursor:pointer;transition:color .2s}
+  .lang button.on{color:var(--white)}
+  .lang .knob{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);background:var(--black);
+    border-radius:999px;transition:transform .25s cubic-bezier(.4,0,.2,1)}
+  .lang[data-lang="pt"] .knob{transform:translateX(100%)}
+
+  /* hero */
+  .hero{padding:90px 0 100px}
+  .pill{display:inline-block;font-size:.8rem;font-weight:500;color:var(--blue-dark);background:var(--blue-soft);
+    padding:5px 12px;border-radius:999px;margin-bottom:26px}
+  h1{font-size:clamp(3rem,9vw,5.6rem);font-weight:700;line-height:.95;letter-spacing:-2.5px}
+  h1 span{display:block;color:var(--blue)}
+  .lead{font-size:1.15rem;color:var(--grey);max-width:540px;margin:28px 0 40px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:12px;font-weight:700;
+    text-decoration:none;font-size:1rem;transition:background .15s,transform .15s}
+  .btn-main{background:var(--black);color:var(--white)}
+  .btn-main:hover{background:var(--blue-dark);transform:translateY(-2px)}
+  .btn-main .arrow{color:var(--blue)}
+  .btn-main:hover .arrow{color:var(--white)}
+  .meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:34px;font-size:.88rem;color:var(--grey)}
+  .meta b{color:var(--black);font-weight:500}
+
+  /* sections */
+  section{padding:80px 0;border-top:1px solid var(--line)}
+  h2{font-size:1.8rem;font-weight:700;letter-spacing:-.8px;margin-bottom:10px}
+  h2::before{content:"";display:inline-block;width:10px;height:10px;background:var(--blue);border-radius:2px;margin-right:12px;vertical-align:middle}
+  .sub{color:var(--grey);max-width:580px;margin-bottom:40px}
+
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:34px 40px}
+  .feat h3{font-size:1.02rem;margin-bottom:4px}
+  .feat p{color:var(--grey);font-size:.95rem}
+
+  ol.steps{list-style:none;counter-reset:s}
+  ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{content:counter(s,decimal-leading-zero);font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--blue-dark)}
+  ol.steps h3{font-size:1.05rem;margin-bottom:3px}
+  ol.steps p{color:var(--grey)}
+  code{font-family:"JetBrains Mono",monospace;background:var(--off);border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:.85em;color:var(--black)}
+
+  .dl{background:var(--black);color:var(--white);border-radius:20px;padding:40px;display:grid;grid-template-columns:1.3fr 1fr;gap:34px;align-items:center}
+  @media(max-width:720px){.dl{grid-template-columns:1fr;padding:28px}}
+  .dl table{width:100%;border-collapse:collapse;font-size:.92rem}
+  .dl td{padding:9px 0;border-bottom:1px solid #222}
+  .dl td:first-child{color:#9ca3af;width:40%}
+  .hash{word-break:break-all;font-size:.76rem;color:var(--blue)}
+  .copy{background:none;border:1px solid #333;color:#9ca3af;border-radius:6px;padding:2px 8px;cursor:pointer;font:inherit;font-size:.74rem;margin-left:6px}
+  .copy:hover{color:var(--white);border-color:var(--blue)}
+  .dl .btn{background:var(--blue);color:var(--black);width:100%;justify-content:center;font-size:1.05rem;padding:18px}
+  .dl .btn:hover{background:var(--white);transform:translateY(-2px)}
+  .dl small{display:block;text-align:center;color:#9ca3af;font-size:.8rem;margin-top:12px}
+
+  details{border-bottom:1px solid var(--line);padding:20px 0}
+  summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--blue-dark);font-size:1.3rem;line-height:1;transition:transform .2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--grey);margin-top:10px}
+
+  .log .v{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--blue-dark)}
+  .log .d{color:var(--grey);font-size:.85rem;margin-left:10px}
+  .log ul{margin:10px 0 0 18px;color:var(--grey)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;font-size:.84rem;color:var(--grey)}
+  footer .disc{margin-bottom:24px;max-width:640px}
+  footer .by{color:var(--black);font-weight:500}
+  footer .by span{color:var(--blue-dark)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo">TEENY TITANS <span>RECOMP</span></a>
+    <div class="lang" id="lang" data-lang="en" role="group" aria-label="Language">
+      <span class="knob"></span>
+      <button type="button" data-set="en" class="on">EN</button>
+      <button type="button" data-set="pt">PT</button>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="pill" id="pill"></span>
+    <h1>Teeny Titans<span>Recomp</span></h1>
+    <p class="lead" data-i18n="lead"></p>
+    <a class="btn btn-main" href="#download"><span data-i18n="ctaHero"></span> <span class="arrow">↓</span></a>
+    <div class="meta">
+      <span>Android <b id="meta-android"></b></span>
+      <span><span data-i18n="size"></span> <b id="meta-size"></b></span>
+      <span><span data-i18n="arch"></span> <b id="meta-arch"></b></span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2 data-i18n="aboutTitle"></h2>
+    <p class="sub" data-i18n="aboutSub"></p>
+    <div class="features">
+      <div class="feat"><h3 data-i18n="f1t"></h3><p data-i18n="f1p"></p></div>
+      <div class="feat"><h3 data-i18n="f2t"></h3><p data-i18n="f2p"></p></div>
+      <div class="feat"><h3 data-i18n="f3t"></h3><p data-i18n="f3p"></p></div>
+      <div class="feat"><h3 data-i18n="f4t"></h3><p data-i18n="f4p"></p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 data-i18n="installTitle"></h2>
+    <p class="sub" data-i18n="installSub"></p>
+    <ol class="steps">
+      <li><div><h3 data-i18n="s1t"></h3><p data-i18n="s1p"></p></div></li>
+      <li><div><h3 data-i18n="s2t"></h3><p data-i18n="s2p"></p></div></li>
+      <li><div><h3 data-i18n="s3t"></h3><p data-i18n="s3p"></p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <h2>Download</h2>
+    <p class="sub" data-i18n="dlSub"></p>
+    <div class="dl">
+      <table>
+        <tr><td data-i18n="version"></td><td class="mono" id="dl-version"></td></tr>
+        <tr><td data-i18n="date"></td><td id="dl-date"></td></tr>
+        <tr><td data-i18n="size"></td><td id="dl-size"></td></tr>
+        <tr><td data-i18n="requires"></td><td id="dl-android"></td></tr>
+      </table>
+      <div>
+        <a class="btn" id="btn-dl" href="#" target="_blank" rel="noopener"><span data-i18n="ctaDl"></span> ↓</a>
+        <small data-i18n="dlNote"></small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 data-i18n="faqTitle"></h2>
+    <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+    <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+    <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+    <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Changelog</h2>
+    <div class="log">
+      <span class="v" id="log-version"></span><span class="d" id="log-date"></span>
+      <ul>
+        <li data-i18n="log1"></li>
+        <li data-i18n="log2"></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="disc" data-i18n="disc"></p>
+    <p class="by"><span data-i18n="madeBy"></span> <span>Rodrigo350506</span></p>
+  </div>
+</footer>
+
+<script>
+/* ===== EDITA SÓ ISTO ===== */
+const CONFIG = {
+  version:    "v1.0",
+  date:       "2026-11-11",
+  size:       "248 MB",
+  minAndroid: "8.0",
+  arch:       "arm64-v8a",
+  fileName:   "TeenyTitansRecomp.apk",
+  mediafire:  "https://www.mediafire.com/file/rgvfjr55s3p1xa2/TeenyTitansRecomp.apk/file"
+};
+/* ========================= */
+
+const F = `<code>${CONFIG.fileName}</code>`;
+const T = {
+  en: {
+    pill: "Preservation project",
+    lead: "The figure-collecting battle game that vanished from the Play Store, recompiled so it opens and plays again on modern Android phones.",
+    ctaHero: "Download APK",
+    size: "Size", arch: "Architecture",
+    aboutTitle: "What it is",
+    aboutSub: "The original release (1.2.7) was built for Android from almost a decade ago. On current phones it shows a black screen and closes right away. This project adapts the original game to today's systems.",
+    f1t: "Runs on modern Android", f1p: "Adapted to recent Android versions and 64-bit processors.",
+    f2t: "No black screen", f2p: "Fixed the startup crash of the original APK.",
+    f3t: "Works offline", f3p: "No reliance on servers that were shut down long ago.",
+    f4t: "Game untouched", f4p: "Same figures, battles and progression. Only what was needed to make it work has changed.",
+    installTitle: "How to install",
+    installSub: "If you have the old version installed, uninstall it first.",
+    s1t: "Download the APK", s1p: "Tap the download button. On the MediaFire page, tap the blue <code>Download</code> button.",
+    s2t: "Allow unknown sources", s2p: "When you open the file, Android asks for permission. Turn on <code>Install unknown apps</code> for your browser or file manager.",
+    s3t: "Install and play", s3p: `Open ${F} and tap <code>Install</code>. If Play Protect warns you, choose <code>Install anyway</code>.`,
+    dlSub: "The file is hosted on MediaFire.",
+    version: "Version", date: "Date", requires: "Requires",
+    androidReq: v => `Android ${v} or later`,
+    copy: "copy", copied: "copied!",
+    ctaDl: "Download on MediaFire",
+    dlNote: "This page is the only official link.",
+    faqTitle: "FAQ",
+    q1: "Is it safe to install?", a1: "It's the original game with only the changes needed to run on modern Android. Always download it from the link on this page.",
+    q2: "Will I lose my progress if I uninstall?", a2: "Yes. Progress is stored on your phone and uninstalling deletes it.",
+    q3: "Does it work on iPhone?", a3: "No. This recomp is Android only.",
+    q4: "What about Teeny Titans 2?", a4: "It's already in development and coming very soon. It will get the same treatment: fixed to open and run on modern Android, with the original game kept intact. The download will appear right here on this page.",
+    log1: "First public release.",
+    log2: "Fixed the black screen and startup crash on modern Android.",
+    disc: "Unofficial, non-profit fan project made to preserve a game that is no longer available. Not affiliated with Warner Bros., Cartoon Network or Turner. Teeny Titans, Teen Titans Go! and all characters are trademarks of their respective owners.",
+    madeBy: "Made by",
+    locale: "en-GB"
+  },
+  pt: {
+    pill: "Projeto de preservação",
+    lead: "O jogo de colecionar e lutar com figuras que desapareceu da Play Store, recompilado para voltar a abrir e a jogar-se em telemóveis Android atuais.",
+    ctaHero: "Descarregar APK",
+    size: "Tamanho", arch: "Arquitetura",
+    aboutTitle: "O que é",
+    aboutSub: "A versão original (1.2.7) foi feita para Android de há quase uma década. Em telemóveis atuais abre com ecrã preto e fecha logo. Este projeto adapta o jogo original aos sistemas de hoje.",
+    f1t: "Corre em Android atual", f1p: "Adaptado às versões recentes do Android e a processadores de 64 bits.",
+    f2t: "Sem ecrã preto", f2p: "Corrigido o crash ao arrancar do APK original.",
+    f3t: "Funciona offline", f3p: "Não depende de servidores que já foram desligados.",
+    f4t: "Jogo intacto", f4p: "Mesmas figuras, lutas e progressão. Só mudou o necessário para funcionar.",
+    installTitle: "Como instalar",
+    installSub: "Se tiveres a versão antiga instalada, desinstala-a primeiro.",
+    s1t: "Descarrega o APK", s1p: "Carrega no botão de download. Na página do MediaFire, carrega no botão azul <code>Download</code>.",
+    s2t: "Permite fontes desconhecidas", s2p: "Quando abrires o ficheiro, o Android pede autorização. Ativa <code>Instalar apps desconhecidas</code> para o browser ou gestor de ficheiros.",
+    s3t: "Instala e joga", s3p: `Abre ${F} e carrega em <code>Instalar</code>. Se o Play Protect avisar, escolhe <code>Instalar mesmo assim</code>.`,
+    dlSub: "O ficheiro está alojado no MediaFire.",
+    version: "Versão", date: "Data", requires: "Requer",
+    androidReq: v => `Android ${v} ou superior`,
+    copy: "copiar", copied: "copiado!",
+    ctaDl: "Descarregar no MediaFire",
+    dlNote: "Link oficial só nesta página.",
+    faqTitle: "Perguntas frequentes",
+    q1: "É seguro instalar?", a1: "É o jogo original só com as alterações necessárias para correr em Android atual. Descarrega sempre pelo link desta página.",
+    q2: "Perco o progresso se desinstalar?", a2: "Sim. O progresso fica guardado no telemóvel e desinstalar apaga-o.",
+    q3: "Funciona no iPhone?", a3: "Não. Este recomp é só para Android.",
+    q4: "E o Teeny Titans 2?", a4: "Já está em desenvolvimento e sai muito em breve. Vai ter o mesmo tratamento: corrigido para abrir e correr em Android atual, com o jogo original intacto. O download vai aparecer aqui mesmo nesta página.",
+    log1: "Primeira versão pública.",
+    log2: "Corrigido o ecrã preto e o crash ao arrancar em Android atual.",
+    disc: "Projeto não oficial feito por fãs, sem fins lucrativos, para preservar um jogo que deixou de estar disponível. Sem qualquer ligação à Warner Bros., Cartoon Network ou Turner. Teeny Titans, Teen Titans Go! e as personagens são marcas dos respetivos donos.",
+    madeBy: "Feito por",
+    locale: "pt-PT"
+  }
+};
+
+const $ = id => document.getElementById(id);
+const sw = $("lang");
+let current = "en";
+
+function setLang(lang){
+  current = T[lang] ? lang : "en";
+  const t = T[current];
+  document.documentElement.lang = current;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = t[el.dataset.i18n]; });
+  const fmtDate = new Date(CONFIG.date).toLocaleDateString(t.locale,{day:"numeric",month:"long",year:"numeric"});
+  $("pill").textContent = `${t.pill} · ${CONFIG.version}`;
+  $("dl-date").textContent = fmtDate;
+  $("log-date").textContent = fmtDate;
+  $("dl-android").textContent = t.androidReq(CONFIG.minAndroid);
+  sw.dataset.lang = current;
+  sw.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.set === current));
+  try { localStorage.setItem("lang", current); } catch(e){}
+}
+
+// static values
+$("meta-android").textContent = CONFIG.minAndroid + "+";
+$("meta-size").textContent = CONFIG.size;
+$("meta-arch").textContent = CONFIG.arch;
+$("dl-version").textContent = CONFIG.version;
+$("dl-size").textContent = CONFIG.size;
+$("log-version").textContent = CONFIG.version;
+$("btn-dl").href = CONFIG.mediafire;
+
+// switch: click a side, or anywhere to toggle
+sw.addEventListener("click", e => {
+  const target = e.target.closest("button");
+  setLang(target ? target.dataset.set : (current === "en" ? "pt" : "en"));
+});
+
+let saved = null;
+try { saved = localStorage.getItem("lang"); } catch(e){}
+setLang(saved || "en");
+</script>
+</body>
+</html>
