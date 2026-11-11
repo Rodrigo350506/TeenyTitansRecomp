@@ -81,6 +81,8 @@
   .copy:hover{color:var(--white);border-color:var(--blue)}
   .dl .btn{background:var(--blue);color:var(--black);width:100%;justify-content:center;font-size:1.05rem;padding:18px}
   .dl .btn:hover{background:var(--white);transform:translateY(-2px)}
+  .dl .btn-itch{background:none;color:var(--white);border:1.5px solid #333;margin-top:12px;padding:15px;font-size:.98rem}
+  .dl .btn-itch:hover{background:none;border-color:var(--blue);color:var(--blue)}
   .dl small{display:block;text-align:center;color:#9ca3af;font-size:.8rem;margin-top:12px}
 
   details{border-bottom:1px solid var(--line);padding:20px 0}
@@ -165,6 +167,7 @@
       </table>
       <div>
         <a class="btn" id="btn-dl" href="#" target="_blank" rel="noopener"><span data-i18n="ctaDl"></span> ↓</a>
+        <a class="btn btn-itch" id="btn-itch" href="#" target="_blank" rel="noopener"><span data-i18n="ctaItch"></span> ↗</a>
         <small data-i18n="dlNote"></small>
       </div>
     </div>
@@ -210,7 +213,8 @@ const CONFIG = {
   minAndroid: "8.0",
   arch:       "arm64-v8a",
   fileName:   "TeenyTitansRecomp.apk",
-  mediafire:  "https://www.mediafire.com/file/rgvfjr55s3p1xa2/TeenyTitansRecomp.apk/file"
+  mediafire:  "https://www.mediafire.com/file/rgvfjr55s3p1xa2/TeenyTitansRecomp.apk/file",
+  itch:       "https://rodrigo350506.itch.io/teeny-titans-recomp"
 };
 /* ========================= */
 
@@ -232,12 +236,13 @@ const T = {
     s1t: "Download the APK", s1p: "Tap the download button. On the MediaFire page, tap the blue <code>Download</code> button.",
     s2t: "Allow unknown sources", s2p: "When you open the file, Android asks for permission. Turn on <code>Install unknown apps</code> for your browser or file manager.",
     s3t: "Install and play", s3p: `Open ${F} and tap <code>Install</code>. If Play Protect warns you, choose <code>Install anyway</code>.`,
-    dlSub: "The file is hosted on MediaFire.",
+    dlSub: "Download from MediaFire or get it on itch.io.",
+    ctaItch: "Get it on itch.io",
     version: "Version", date: "Date", requires: "Requires",
     androidReq: v => `Android ${v} or later`,
     copy: "copy", copied: "copied!",
     ctaDl: "Download on MediaFire",
-    dlNote: "This page is the only official link.",
+    dlNote: "Only download from the links on this page.",
     faqTitle: "FAQ",
     q1: "Is it safe to install?", a1: "It's the original game with only the changes needed to run on modern Android. Always download it from the link on this page.",
     q2: "Will I lose my progress if I uninstall?", a2: "Yes. Progress is stored on your phone and uninstalling deletes it.",
@@ -265,12 +270,13 @@ const T = {
     s1t: "Descarrega o APK", s1p: "Carrega no botão de download. Na página do MediaFire, carrega no botão azul <code>Download</code>.",
     s2t: "Permite fontes desconhecidas", s2p: "Quando abrires o ficheiro, o Android pede autorização. Ativa <code>Instalar apps desconhecidas</code> para o browser ou gestor de ficheiros.",
     s3t: "Instala e joga", s3p: `Abre ${F} e carrega em <code>Instalar</code>. Se o Play Protect avisar, escolhe <code>Instalar mesmo assim</code>.`,
-    dlSub: "O ficheiro está alojado no MediaFire.",
+    dlSub: "Descarrega pelo MediaFire ou no itch.io.",
+    ctaItch: "Disponível no itch.io",
     version: "Versão", date: "Data", requires: "Requer",
     androidReq: v => `Android ${v} ou superior`,
     copy: "copiar", copied: "copiado!",
     ctaDl: "Descarregar no MediaFire",
-    dlNote: "Link oficial só nesta página.",
+    dlNote: "Descarrega só pelos links desta página.",
     faqTitle: "Perguntas frequentes",
     q1: "É seguro instalar?", a1: "É o jogo original só com as alterações necessárias para correr em Android atual. Descarrega sempre pelo link desta página.",
     q2: "Perco o progresso se desinstalar?", a2: "Sim. O progresso fica guardado no telemóvel e desinstalar apaga-o.",
@@ -311,6 +317,7 @@ $("dl-version").textContent = CONFIG.version;
 $("dl-size").textContent = CONFIG.size;
 $("log-version").textContent = CONFIG.version;
 $("btn-dl").href = CONFIG.mediafire;
+$("btn-itch").href = CONFIG.itch;
 
 // switch: click a side, or anywhere to toggle
 sw.addEventListener("click", e => {
