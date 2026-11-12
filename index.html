@@ -94,12 +94,22 @@
 
   .log .v{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--blue-dark)}
   .log .d{color:var(--grey);font-size:.85rem;margin-left:10px}
-  .log ul{margin:10px 0 0 18px;color:var(--grey)}
+  .log ul{margin:10px 0 32px 18px;color:var(--grey)}
+  .log ul:last-child{margin-bottom:0}
+  .log li{margin-bottom:4px}
+
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:620px}
+  @media(max-width:560px){.shots{gap:16px}}
+  .shots figure{margin:0}
+  .shots img{width:100%;height:auto;display:block;border-radius:22px;border:1px solid var(--line);
+    box-shadow:0 18px 40px -18px rgba(10,10,10,.35);background:var(--off)}
+  .shots figcaption{display:flex;gap:10px;margin-top:16px;font-size:.92rem;color:var(--grey)}
+  .shots .n{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--blue-dark);flex:none}
 
   footer{border-top:1px solid var(--line);padding:40px 0 60px;font-size:.84rem;color:var(--grey)}
   footer .disc{margin-bottom:24px;max-width:640px}
   footer .by{color:var(--black);font-weight:500}
-  footer .by span{color:var(--blue-dark)}
+  footer .by .name{color:var(--blue-dark)}
 </style>
 </head>
 <body>
@@ -138,6 +148,25 @@
       <div class="feat"><h3 data-i18n="f2t"></h3><p data-i18n="f2p"></p></div>
       <div class="feat"><h3 data-i18n="f3t"></h3><p data-i18n="f3p"></p></div>
       <div class="feat"><h3 data-i18n="f4t"></h3><p data-i18n="f4p"></p></div>
+      <div class="feat"><h3 data-i18n="f5t"></h3><p data-i18n="f5p"></p></div>
+      <div class="feat"><h3 data-i18n="f6t"></h3><p data-i18n="f6p"></p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2 data-i18n="savesTitle"></h2>
+    <p class="sub" data-i18n="savesSub"></p>
+    <div class="shots">
+      <figure>
+        <img src="img/saves-1.png" alt="" data-i18n-alt="img1alt" loading="lazy">
+        <figcaption><span class="n">01</span><span data-i18n="img1"></span></figcaption>
+      </figure>
+      <figure>
+        <img src="img/saves-2.png" alt="" data-i18n-alt="img2alt" loading="lazy">
+        <figcaption><span class="n">02</span><span data-i18n="img2"></span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -188,10 +217,18 @@
   <div class="wrap">
     <h2>Changelog</h2>
     <div class="log">
-      <span class="v" id="log-version"></span><span class="d" id="log-date"></span>
+      <span class="v">v1.1</span><span class="d" data-date="2026-11-12"></span>
       <ul>
-        <li data-i18n="log1"></li>
-        <li data-i18n="log2"></li>
+        <li data-i18n="l11a"></li>
+        <li data-i18n="l11b"></li>
+        <li data-i18n="l11c"></li>
+        <li data-i18n="l11d"></li>
+        <li data-i18n="l11e"></li>
+      </ul>
+      <span class="v">v1.0</span><span class="d" data-date="2026-11-11"></span>
+      <ul>
+        <li data-i18n="l10a"></li>
+        <li data-i18n="l10b"></li>
       </ul>
     </div>
   </div>
@@ -200,15 +237,15 @@
 <footer>
   <div class="wrap">
     <p class="disc" data-i18n="disc"></p>
-    <p class="by"><span data-i18n="madeBy"></span> <span>Rodrigo350506</span></p>
+    <p class="by"><span data-i18n="madeBy"></span> <span class="name">Rodrigo350506</span></p>
   </div>
 </footer>
 
 <script>
 /* ===== EDITA SÓ ISTO ===== */
 const CONFIG = {
-  version:    "v1.0",
-  date:       "2026-11-11",
+  version:    "v1.1",
+  date:       "2026-11-12",
   size:       "248 MB",
   minAndroid: "8.0",
   arch:       "arm64-v8a",
@@ -230,7 +267,15 @@ const T = {
     f1t: "Runs on modern Android", f1p: "Adapted to recent Android versions and 64-bit processors.",
     f2t: "No black screen", f2p: "Fixed the startup crash of the original APK.",
     f3t: "Works offline", f3p: "No reliance on servers that were shut down long ago.",
-    f4t: "Game untouched", f4p: "Same figures, battles and progression. Only what was needed to make it work has changed.",
+    f4t: "Foldables & tablets", f4p: "Proper support for foldable phones and tablets, with no stretched or distorted images.",
+    f5t: "Cheat menu", f5p: "Unlock every figure and every teleport, or grab +200 coins with one tap.",
+    f6t: "Coins & saves manager", f6p: "Change your coins, export your save, import someone else's or restore a backup.",
+    savesTitle: "Coins & saves",
+    savesSub: "Manage your coins and save files straight from the home screen, without opening the game.",
+    img1: "Long-press the game icon until the options list appears, then tap <b>Coins &amp; saves</b>.",
+    img2: "The manager opens: set your coins, export or import a save, or restore a backup. The game is closed and your current save is backed up before every change.",
+    img1alt: "Game icon long-press menu with the Coins & saves option",
+    img2alt: "Coins and saves manager screen",
     installTitle: "How to install",
     installSub: "If you have the old version installed, uninstall it first.",
     s1t: "Download the APK", s1p: "Tap the download button. On the MediaFire page, tap the blue <code>Download</code> button.",
@@ -240,16 +285,20 @@ const T = {
     ctaItch: "Get it on itch.io",
     version: "Version", date: "Date", requires: "Requires",
     androidReq: v => `Android ${v} or later`,
-    copy: "copy", copied: "copied!",
     ctaDl: "Download on MediaFire",
     dlNote: "Only download from the links on this page.",
     faqTitle: "FAQ",
-    q1: "Is it safe to install?", a1: "It's the original game with only the changes needed to run on modern Android. Always download it from the link on this page.",
-    q2: "Will I lose my progress if I uninstall?", a2: "Yes. Progress is stored on your phone and uninstalling deletes it.",
+    q1: "Is it safe to install?", a1: "It's the original game, adapted to run on modern Android, plus a few optional extras. Always download it from the links on this page.",
+    q2: "Will I lose my progress if I uninstall?", a2: "Yes, progress is stored on your phone. Before uninstalling, use <b>Export save</b> in the Coins &amp; saves manager and import it again afterwards.",
     q3: "Does it work on iPhone?", a3: "No. This recomp is Android only.",
     q4: "What about Teeny Titans 2?", a4: "It's already in development and coming very soon. It will get the same treatment: fixed to open and run on modern Android, with the original game kept intact. The download will appear right here on this page.",
-    log1: "First public release.",
-    log2: "Fixed the black screen and startup crash on modern Android.",
+    l11a: "Fixed slowdowns in the shop animations.",
+    l11b: "Added a cheat menu: unlock all figures, unlock all teleports and a +200 coins button.",
+    l11c: "Added a coins &amp; saves manager.",
+    l11d: "Added support for foldables and tablets, so images are no longer distorted.",
+    l11e: "Fixed several asset bugs (wrong colours and sizes).",
+    l10a: "First public release.",
+    l10b: "Fixed the black screen and startup crash on modern Android.",
     disc: "Unofficial, non-profit fan project made to preserve a game that is no longer available. Not affiliated with Warner Bros., Cartoon Network or Turner. Teeny Titans, Teen Titans Go! and all characters are trademarks of their respective owners.",
     madeBy: "Made by",
     locale: "en-GB"
@@ -264,7 +313,15 @@ const T = {
     f1t: "Corre em Android atual", f1p: "Adaptado às versões recentes do Android e a processadores de 64 bits.",
     f2t: "Sem ecrã preto", f2p: "Corrigido o crash ao arrancar do APK original.",
     f3t: "Funciona offline", f3p: "Não depende de servidores que já foram desligados.",
-    f4t: "Jogo intacto", f4p: "Mesmas figuras, lutas e progressão. Só mudou o necessário para funcionar.",
+    f4t: "Dobráveis e tablets", f4p: "Suporte para telemóveis dobráveis e tablets, sem imagens esticadas ou distorcidas.",
+    f5t: "Menu de batota", f5p: "Desbloqueia todos os bonecos e todos os teleportes, ou ganha +200 moedas com um toque.",
+    f6t: "Gestor de moedas e saves", f6p: "Muda as moedas, exporta o teu save, importa o de outra pessoa ou repõe um backup.",
+    savesTitle: "Moedas e saves",
+    savesSub: "Gere as moedas e os saves diretamente a partir do ecrã principal, sem abrir o jogo.",
+    img1: "Mantém o ícone do jogo pressionado até aparecer a lista de opções e carrega em <b>Coins &amp; saves</b>.",
+    img2: "Abre o gestor: define as moedas, exporta ou importa um save, ou repõe um backup. O jogo é fechado e o save atual é guardado em backup antes de cada alteração.",
+    img1alt: "Menu do ícone do jogo com a opção Coins & saves",
+    img2alt: "Ecrã do gestor de moedas e saves",
     installTitle: "Como instalar",
     installSub: "Se tiveres a versão antiga instalada, desinstala-a primeiro.",
     s1t: "Descarrega o APK", s1p: "Carrega no botão de download. Na página do MediaFire, carrega no botão azul <code>Download</code>.",
@@ -274,16 +331,20 @@ const T = {
     ctaItch: "Disponível no itch.io",
     version: "Versão", date: "Data", requires: "Requer",
     androidReq: v => `Android ${v} ou superior`,
-    copy: "copiar", copied: "copiado!",
     ctaDl: "Descarregar no MediaFire",
     dlNote: "Descarrega só pelos links desta página.",
     faqTitle: "Perguntas frequentes",
-    q1: "É seguro instalar?", a1: "É o jogo original só com as alterações necessárias para correr em Android atual. Descarrega sempre pelo link desta página.",
-    q2: "Perco o progresso se desinstalar?", a2: "Sim. O progresso fica guardado no telemóvel e desinstalar apaga-o.",
+    q1: "É seguro instalar?", a1: "É o jogo original, adaptado para correr em Android atual, com alguns extras opcionais. Descarrega sempre pelos links desta página.",
+    q2: "Perco o progresso se desinstalar?", a2: "Sim, o progresso fica guardado no telemóvel. Antes de desinstalar, usa <b>Export save</b> no gestor de moedas e saves e importa-o outra vez depois.",
     q3: "Funciona no iPhone?", a3: "Não. Este recomp é só para Android.",
     q4: "E o Teeny Titans 2?", a4: "Já está em desenvolvimento e sai muito em breve. Vai ter o mesmo tratamento: corrigido para abrir e correr em Android atual, com o jogo original intacto. O download vai aparecer aqui mesmo nesta página.",
-    log1: "Primeira versão pública.",
-    log2: "Corrigido o ecrã preto e o crash ao arrancar em Android atual.",
+    l11a: "Corrigida a lentidão nas animações da loja.",
+    l11b: "Adicionado menu de batota: desbloquear todos os bonecos, desbloquear todos os teleportes e botão de +200 moedas.",
+    l11c: "Adicionado gestor de moedas e saves.",
+    l11d: "Adicionada compatibilidade com dobráveis e tablets, para as imagens não ficarem distorcidas.",
+    l11e: "Corrigidos vários bugs de assets (cores e tamanhos errados).",
+    l10a: "Primeira versão pública.",
+    l10b: "Corrigido o ecrã preto e o crash ao arrancar em Android atual.",
     disc: "Projeto não oficial feito por fãs, sem fins lucrativos, para preservar um jogo que deixou de estar disponível. Sem qualquer ligação à Warner Bros., Cartoon Network ou Turner. Teeny Titans, Teen Titans Go! e as personagens são marcas dos respetivos donos.",
     madeBy: "Feito por",
     locale: "pt-PT"
@@ -299,10 +360,12 @@ function setLang(lang){
   const t = T[current];
   document.documentElement.lang = current;
   document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = t[el.dataset.i18n]; });
-  const fmtDate = new Date(CONFIG.date).toLocaleDateString(t.locale,{day:"numeric",month:"long",year:"numeric"});
+  document.querySelectorAll("[data-i18n-alt]").forEach(el => { el.alt = t[el.dataset.i18nAlt]; });
+  const fmt = d => new Date(d).toLocaleDateString(t.locale,{day:"numeric",month:"long",year:"numeric"});
+  const fmtDate = fmt(CONFIG.date);
+  document.querySelectorAll("[data-date]").forEach(el => { el.textContent = fmt(el.dataset.date); });
   $("pill").textContent = `${t.pill} · ${CONFIG.version}`;
   $("dl-date").textContent = fmtDate;
-  $("log-date").textContent = fmtDate;
   $("dl-android").textContent = t.androidReq(CONFIG.minAndroid);
   sw.dataset.lang = current;
   sw.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.set === current));
@@ -315,7 +378,6 @@ $("meta-size").textContent = CONFIG.size;
 $("meta-arch").textContent = CONFIG.arch;
 $("dl-version").textContent = CONFIG.version;
 $("dl-size").textContent = CONFIG.size;
-$("log-version").textContent = CONFIG.version;
 $("btn-dl").href = CONFIG.mediafire;
 $("btn-itch").href = CONFIG.itch;
 
