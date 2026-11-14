@@ -217,6 +217,11 @@
   <div class="wrap">
     <h2>Changelog</h2>
     <div class="log">
+      <span class="v">v1.2</span><span class="d" data-date="2026-11-14"></span>
+      <ul>
+        <li data-i18n="l12a"></li>
+        <li data-i18n="l12b"></li>
+      </ul>
       <span class="v">v1.1</span><span class="d" data-date="2026-11-12"></span>
       <ul>
         <li data-i18n="l11a"></li>
@@ -244,8 +249,8 @@
 <script>
 /* ===== EDITA SÓ ISTO ===== */
 const CONFIG = {
-  version:    "v1.1",
-  date:       "2026-11-12",
+  version:    "v1.2",
+  date:       "2026-11-14",
   size:       "248 MB",
   minAndroid: "8.0",
   arch:       "arm64-v8a",
@@ -264,11 +269,11 @@ const T = {
     size: "Size", arch: "Architecture",
     aboutTitle: "What it is",
     aboutSub: "The original release (1.2.7) was built for Android from almost a decade ago. On current phones it shows a black screen and closes right away. This project adapts the original game to today's systems.",
-    f1t: "Runs on modern Android", f1p: "Adapted to recent Android versions and 64-bit processors.",
-    f2t: "No black screen", f2p: "Fixed the startup crash of the original APK.",
+    f1t: "Runs on modern Android", f1p: "Adapted to recent Android versions and 64-bit processors, with no more black screen on startup.",
+    f2t: "Team bonus unlocked", f2p: "The team bonus feature, disabled in the original game, is now turned on.",
     f3t: "Works offline", f3p: "No reliance on servers that were shut down long ago.",
     f4t: "Foldables & tablets", f4p: "Proper support for foldable phones and tablets, with no stretched or distorted images.",
-    f5t: "Cheat menu", f5p: "Unlock every figure and every teleport, or grab +200 coins with one tap.",
+    f5t: "Cheat menu", f5p: "Unlock every figure and teleport, grab +200 coins, or speed up battles x2 or x3 without changing speed on the map.",
     f6t: "Coins & saves manager", f6p: "Change your coins, export your save, import someone else's or restore a backup.",
     savesTitle: "Coins & saves",
     savesSub: "Manage your coins and save files straight from the home screen, without opening the game.",
@@ -292,6 +297,8 @@ const T = {
     q2: "Will I lose my progress if I uninstall?", a2: "Yes, progress is stored on your phone. Before uninstalling, use <b>Export save</b> in the Coins &amp; saves manager and import it again afterwards.",
     q3: "Does it work on iPhone?", a3: "No. This recomp is Android only.",
     q4: "What about Teeny Titans 2?", a4: "It's already in development and coming very soon. It will get the same treatment: fixed to open and run on modern Android, with the original game kept intact. The download will appear right here on this page.",
+    l12a: "Cheat menu: new battle speed options (x2 and x3) that don't affect speed on the map.",
+    l12b: "Enabled the team bonus feature, which was disabled in the original game.",
     l11a: "Fixed slowdowns in the shop animations.",
     l11b: "Added a cheat menu: unlock all figures, unlock all teleports and a +200 coins button.",
     l11c: "Added a coins &amp; saves manager.",
@@ -310,11 +317,11 @@ const T = {
     size: "Tamanho", arch: "Arquitetura",
     aboutTitle: "O que é",
     aboutSub: "A versão original (1.2.7) foi feita para Android de há quase uma década. Em telemóveis atuais abre com ecrã preto e fecha logo. Este projeto adapta o jogo original aos sistemas de hoje.",
-    f1t: "Corre em Android atual", f1p: "Adaptado às versões recentes do Android e a processadores de 64 bits.",
-    f2t: "Sem ecrã preto", f2p: "Corrigido o crash ao arrancar do APK original.",
+    f1t: "Corre em Android atual", f1p: "Adaptado às versões recentes do Android e a processadores de 64 bits, sem ecrã preto ao arrancar.",
+    f2t: "Bónus de equipa ativado", f2p: "A funcionalidade de bónus de equipa, desativada no jogo original, está agora ligada.",
     f3t: "Funciona offline", f3p: "Não depende de servidores que já foram desligados.",
     f4t: "Dobráveis e tablets", f4p: "Suporte para telemóveis dobráveis e tablets, sem imagens esticadas ou distorcidas.",
-    f5t: "Menu de batota", f5p: "Desbloqueia todos os bonecos e todos os teleportes, ou ganha +200 moedas com um toque.",
+    f5t: "Menu de batota", f5p: "Desbloqueia todos os bonecos e teleportes, ganha +200 moedas ou acelera as batalhas x2 ou x3 sem mudar a velocidade no mapa.",
     f6t: "Gestor de moedas e saves", f6p: "Muda as moedas, exporta o teu save, importa o de outra pessoa ou repõe um backup.",
     savesTitle: "Moedas e saves",
     savesSub: "Gere as moedas e os saves diretamente a partir do ecrã principal, sem abrir o jogo.",
@@ -338,6 +345,8 @@ const T = {
     q2: "Perco o progresso se desinstalar?", a2: "Sim, o progresso fica guardado no telemóvel. Antes de desinstalar, usa <b>Export save</b> no gestor de moedas e saves e importa-o outra vez depois.",
     q3: "Funciona no iPhone?", a3: "Não. Este recomp é só para Android.",
     q4: "E o Teeny Titans 2?", a4: "Já está em desenvolvimento e sai muito em breve. Vai ter o mesmo tratamento: corrigido para abrir e correr em Android atual, com o jogo original intacto. O download vai aparecer aqui mesmo nesta página.",
+    l12a: "Menu de batota: novas opções para acelerar as batalhas (x2 e x3) sem afetar a velocidade no mapa.",
+    l12b: "Ativada a funcionalidade de bónus de equipa, que estava desativada no jogo original.",
     l11a: "Corrigida a lentidão nas animações da loja.",
     l11b: "Adicionado menu de batota: desbloquear todos os bonecos, desbloquear todos os teleportes e botão de +200 moedas.",
     l11c: "Adicionado gestor de moedas e saves.",
