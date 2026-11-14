@@ -85,6 +85,10 @@
   .dl .btn-itch:hover{background:none;border-color:var(--blue);color:var(--blue)}
   .dl small{display:block;text-align:center;color:#9ca3af;font-size:.8rem;margin-top:12px}
 
+  .com{background:var(--blue-soft);border-radius:20px;padding:34px 36px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+  .com-name{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:1.15rem;margin-bottom:10px}
+  .com-list{list-style:none;color:var(--grey);font-size:.95rem}
+  .com-list li::before{content:"";display:inline-block;width:6px;height:6px;background:var(--blue-dark);border-radius:50%;margin-right:10px;vertical-align:middle}
   details{border-bottom:1px solid var(--line);padding:20px 0}
   summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:10px}
   summary::-webkit-details-marker{display:none}
@@ -203,6 +207,24 @@
   </div>
 </section>
 
+<section id="community">
+  <div class="wrap">
+    <h2 data-i18n="comTitle"></h2>
+    <p class="sub" data-i18n="comSub"></p>
+    <div class="com">
+      <div>
+        <div class="com-name">r/TeenyTitansRecomp</div>
+        <ul class="com-list">
+          <li data-i18n="com1"></li>
+          <li data-i18n="com2"></li>
+          <li data-i18n="com3"></li>
+        </ul>
+      </div>
+      <a class="btn btn-main" id="btn-reddit" href="#" target="_blank" rel="noopener"><span data-i18n="ctaReddit"></span> <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <h2 data-i18n="faqTitle"></h2>
@@ -256,7 +278,8 @@ const CONFIG = {
   arch:       "arm64-v8a",
   fileName:   "TeenyTitansRecomp.apk",
   mediafire:  "https://www.mediafire.com/file/seov5kh2a05ft5z/TeenyTitansRecomp.apk/file",
-  itch:       "https://rodrigo350506.itch.io/teeny-titans-recomp"
+  itch:       "https://rodrigo350506.itch.io/teeny-titans-recomp",
+  reddit:     "https://www.reddit.com/r/TeenyTitansRecomp/"
 };
 /* ========================= */
 
@@ -292,6 +315,12 @@ const T = {
     androidReq: v => `Android ${v} or later`,
     ctaDl: "Download on MediaFire",
     dlNote: "Only download from the links on this page.",
+    comTitle: "Community",
+    comSub: "Join the subreddit to follow updates, report bugs and talk with other players.",
+    com1: "Release announcements and changelogs",
+    com2: "Bug reports and help",
+    com3: "Share saves and suggestions",
+    ctaReddit: "Join on Reddit",
     faqTitle: "FAQ",
     q1: "Is it safe to install?", a1: "It's the original game, adapted to run on modern Android, plus a few optional extras. Always download it from the links on this page.",
     q2: "Will I lose my progress if I uninstall?", a2: "Yes, progress is stored on your phone. Before uninstalling, use <b>Export save</b> in the Coins &amp; saves manager and import it again afterwards.",
@@ -340,6 +369,12 @@ const T = {
     androidReq: v => `Android ${v} ou superior`,
     ctaDl: "Descarregar no MediaFire",
     dlNote: "Descarrega só pelos links desta página.",
+    comTitle: "Comunidade",
+    comSub: "Junta-te ao subreddit para acompanhares as novidades, reportares bugs e falares com outros jogadores.",
+    com1: "Anúncios de novas versões e changelogs",
+    com2: "Reports de bugs e ajuda",
+    com3: "Partilha de saves e sugestões",
+    ctaReddit: "Entrar no Reddit",
     faqTitle: "Perguntas frequentes",
     q1: "É seguro instalar?", a1: "É o jogo original, adaptado para correr em Android atual, com alguns extras opcionais. Descarrega sempre pelos links desta página.",
     q2: "Perco o progresso se desinstalar?", a2: "Sim, o progresso fica guardado no telemóvel. Antes de desinstalar, usa <b>Export save</b> no gestor de moedas e saves e importa-o outra vez depois.",
@@ -389,6 +424,7 @@ $("dl-version").textContent = CONFIG.version;
 $("dl-size").textContent = CONFIG.size;
 $("btn-dl").href = CONFIG.mediafire;
 $("btn-itch").href = CONFIG.itch;
+$("btn-reddit").href = CONFIG.reddit;
 
 // switch: click a side, or anywhere to toggle
 sw.addEventListener("click", e => {
